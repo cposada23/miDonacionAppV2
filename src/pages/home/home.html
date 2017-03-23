@@ -1,0 +1,41 @@
+<ion-header>
+  
+</ion-header>
+
+<ion-content padding style="background-image: url(assets/img/deg3.png); background-repeat: no-repeat;background-size:cover;">
+  <ion-card>
+   
+    <img src="assets/img/fondoNegro.jpg"/>
+    <div class="card-title">¿Qué eres?</div>
+    <div class="card-content">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6 >
+            <ion-card (click)="irDonar()">
+              <img src="assets/img/fondo.jpg" />
+              <div class="card-subtitle">Donador</div>
+            </ion-card>
+          </ion-col> 
+          <ion-col col-6 >
+            <ion-card (click)="irBeneficio()">
+              <img src="assets/img/fondo.jpg"/>
+              <div class="card-subtitle">Beneficiario</div>
+            </ion-card>
+          </ion-col> 
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+  <br/>
+  <br/>
+
+  <button ion-button color="dark" full round icon-left (click)="irLogin()" *ngIf="!autenticado">
+    <ion-icon name='log-in' is-active="false"></ion-icon>
+    Ingreso
+  </button>
+
+  <button ion-button color="dark" full round icon-left (click)="logout()" *ngIf="autenticado">
+    <ion-icon name='log-in' is-active="false"></ion-icon>
+   Logout
+  </button>
+</ion-content>

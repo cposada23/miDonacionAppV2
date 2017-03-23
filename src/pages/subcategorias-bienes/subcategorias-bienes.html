@@ -1,0 +1,29 @@
+<!--
+  Generated template for the SubcategoriasBienes page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>subcategorias-bienes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style="background-image: url(assets/img/deg3.png); background-repeat: no-repeat;background-size:cover;">
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-grid>
+    <ion-row>
+      <!--<ion-col col-6 *ngFor="let subCategoria of (subCategoriasBienes$ | async)" (click)="irSubCategorias(categoria)">-->
+      <ion-col col-6 *ngFor="let subCategoria of subcategoriasBienesFiltro" (click)="irProductos(subCategoria)">
+        <ion-card>
+          <img src="assets/img/fondosub.jpg"/>
+          <div class="card-title">{{subCategoria?.nombre}}</div>
+        </ion-card>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>
+</ion-content>

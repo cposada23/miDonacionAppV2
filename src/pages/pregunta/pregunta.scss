@@ -1,0 +1,28 @@
+page-pregunta {
+    ion-card {
+        position: relative;
+        text-align: center;
+    }
+
+    .card-title {
+        position: absolute;
+        top: 20%;
+        font-size: 1.5em;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .card-subtitle {
+        font-size: 1.5em;
+        position: absolute;
+        top: 47%;
+        width: 100%;
+        color: #fff;
+    }
+    .card-content {
+        position: absolute;
+        top: 35%;
+        width: 100%;
+    }
+}
