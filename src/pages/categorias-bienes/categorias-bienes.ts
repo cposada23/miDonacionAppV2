@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 //import { Observable }  from 'rxjs';
+import { DonacionService } from '../../providers/donacion-service';
 import { CategoriaBienes } from '../../models/categoriasBienes'; 
 import { CategoriaService } from '../../providers/categoria-service';
 import { SubcategoriasBienesPage } from '../subcategorias-bienes/subcategorias-bienes';
@@ -17,10 +18,12 @@ import { SubcategoriasBienesPage } from '../subcategorias-bienes/subcategorias-b
 })
 export class CategoriasBienesPage {
 
-  c//categoriasBienes$: Observable<CategoriaBienes[]>
+  //c//categoriasBienes$: Observable<CategoriaBienes[]>
   categoriasBienes: CategoriaBienes[];
   categoriasBienesFiltro: CategoriaBienes[];
-  constructor(private categoriaService: CategoriaService, public navCtrl: NavController, public navParams: NavParams) {
+  pregunta:string;
+  perfil:string; //Donante o beneficiario
+  constructor(private donacionService:DonacionService,  private categoriaService: CategoriaService, public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -30,6 +33,17 @@ export class CategoriasBienesPage {
       this.categoriasBienes = CategoriaBienes.fromjsonArray(categorias);
       this.categoriasBienesFiltro = CategoriaBienes.fromjsonArray(categorias);
     });
+    this.perfil = this.navParams.get('perfil');
+    switch(this.perfil){
+      case 'Donante':
+        this.pregunta = '¿Para que categoria?';
+        break;
+      case 'Beneficiario':
+        this.pregunta = 'selecciona la categoria';
+        break;
+    }
+
+    
   }
 
   initializeItems(){
@@ -48,8 +62,12 @@ export class CategoriasBienesPage {
 
   irSubCategorias(categoria){
     //console.log("categoria", categoria)
+    if( 'Donante'  === this.perfil){
+      this.donacionService.setCategoria(categoria.nombre,categoria.$key);
+    }
     this.navCtrl.push(SubcategoriasBienesPage , {
-      categoria: categoria.$key
+      categoria: categoria.$key,
+      perfil:this.perfil
     });
   }
 

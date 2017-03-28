@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CategoriasBienesPage } from '../categorias-bienes/categorias-bienes';
+import { DonacionService } from '../../providers/donacion-service';
+import { Auth } from '../../providers/auth';
 /*
   Generated class for the Pregunta page.
 
@@ -13,13 +15,18 @@ import { CategoriasBienesPage } from '../categorias-bienes/categorias-bienes';
 })
 export class PreguntaPage {
   pregunta:string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  perfil:string;
+  usuario:Object;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private donacionService:DonacionService, private auth:Auth) {}
 
   ionViewDidLoad() {
-    let perfil = this.navParams.get('perfil');
-    switch(perfil){
+    this.perfil = this.navParams.get('perfil');
+    
+    switch(this.perfil){
       case 'Donante':
-        this.pregunta = '¿Qué quieres donar?'
+        this.pregunta = '¿Qué quieres donar?';
+        this.usuario = this.auth.datosUsuario();
+        this.donacionService.setUsuario(this.usuario['nombre'],this.usuario['key']);
         break;
       case 'Beneficiario':
         this.pregunta = '¿Qué buscas?';
@@ -28,7 +35,9 @@ export class PreguntaPage {
 
   }
    irCategoriasBienes(){
-    this.navCtrl.push(CategoriasBienesPage);
+    this.navCtrl.push(CategoriasBienesPage, {
+      perfil: this.perfil
+    });
   }
 
 

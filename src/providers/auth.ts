@@ -24,6 +24,9 @@ export class Auth {
    isAutenticado():boolean {
      return this.autenticado;
    }
+   getUsuario():Usuario{
+     return this.usuario;
+   }
 
    getUsuarioActivo(uid){
     return this.db.object('usuarios/'+uid);  
@@ -37,6 +40,13 @@ export class Auth {
      return this.perfil;
    }
 
+   datosUsuario():Object{
+     const usuario = {
+      nombre: this.usuario.nombre,
+      key: this.usuario.$key
+     }
+     return usuario;
+   }
 
    login(email:string, password:string){
      return this.af.auth.login({email, password});

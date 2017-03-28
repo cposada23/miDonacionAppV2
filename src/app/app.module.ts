@@ -14,8 +14,9 @@ import { PerfilPage } from '../pages/perfil/perfil';
 /**categorias Bienes */
 import { CategoriasBienesPage } from '../pages/categorias-bienes/categorias-bienes';
 import { SubcategoriasBienesPage } from '../pages/subcategorias-bienes/subcategorias-bienes';
-import { CategoriaService } from '../providers/categoria-service';
 
+/** Nueva donacion */
+import { NuevaDonacionPage } from '../pages/nueva-donacion/nueva-donacion';
 
 import { PreguntaPage }  from '../pages/pregunta/pregunta';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -32,6 +33,11 @@ import { RegistroPage } from '../pages/registro/registro';
 /** Servicios */
   /** Autenticación */
   import { Auth } from '../providers/auth';
+  /**Categorias y subcategorias */
+  import { CategoriaService } from '../providers/categoria-service';
+  /**Donaciones */
+  import { DonacionService } from '../providers/donacion-service';
+ 
 
 @NgModule({
   declarations: [
@@ -46,7 +52,8 @@ import { RegistroPage } from '../pages/registro/registro';
     PerfilPage,
     PreguntaPage,
     CategoriasBienesPage,
-    SubcategoriasBienesPage
+    SubcategoriasBienesPage,
+    NuevaDonacionPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -65,14 +72,16 @@ import { RegistroPage } from '../pages/registro/registro';
     PerfilPage,
     PreguntaPage,
     CategoriasBienesPage,
-    SubcategoriasBienesPage
+    SubcategoriasBienesPage,
+    NuevaDonacionPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Auth,
-    CategoriaService
+    CategoriaService,
+    DonacionService
   ]
 })
 export class AppModule {}
