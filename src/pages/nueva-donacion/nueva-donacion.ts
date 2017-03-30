@@ -58,13 +58,13 @@ export class NuevaDonacionPage {
         {
           text:'Camara',
           icon:'camera',
-          handler:()=>{
+          handler: () => {
             console.log("camera clicked");
           }
         },{
           text:'Galeria',
           icon:'photos',
-          handler:()=>{
+          handler: () => {
             this.openGallery();
           }
         },
