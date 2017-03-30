@@ -3,12 +3,12 @@
 export class Donacion {
     private _usuarioKey:string;
     private _usuarioNombre:string;
-    private estado:string;
+    /*private estado:string;
     private fecha:Date;
     private categoriaKey: string;
     private categoriaNombre: string;
     private subCategoriaKey: string;
-    private subCtegoriaNombre: string;
+    private subCtegoriaNombre: string;*/
 
 
     constructor(

@@ -40,4 +40,14 @@ export class DonacionService {
     console.log("this.donacion", this.donacion);
   }
 
+  getDonacion():Object{
+    return this.donacion;
+  }
+
+  nuevaDonacion(){
+    if(this.donacion){
+      console.log(this.donacion);
+    }
+  }
+
 }

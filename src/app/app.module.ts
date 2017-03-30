@@ -4,6 +4,8 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 
+/** Ionic native  */
+import { ImagePicker } from '@ionic-native/image-picker';
 
 /** tabs */
 import { TabsPage } from '../pages/tabs/tabs';
@@ -81,7 +83,8 @@ import { RegistroPage } from '../pages/registro/registro';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Auth,
     CategoriaService,
-    DonacionService
+    DonacionService,
+    ImagePicker
   ]
 })
 export class AppModule {}

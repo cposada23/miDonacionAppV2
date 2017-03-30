@@ -14,27 +14,47 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <form autocomplete="off" novalidate [formGroup]="donacion" (ngSubmit)="continuar()">
+    <ion-list>
 
-    <ion-item>
-      <ion-label floating>Titulo</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label floating>Titulo</ion-label>
+        <ion-input type="text" formControlName="titulo"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Descripcion</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Estado</ion-label>
-      <ion-select [(ngModel)]="estado">
-        <ion-option value="nuevo">Nuevo</ion-option>
-        <ion-option value="usado">Usado</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+      <ion-item>
+        <ion-label floating>Descripcion</ion-label>
+        <ion-input type="rext" formControlName="descripcion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estado</ion-label>
+        <ion-select  formControlName="estado">
+          <ion-option value="nuevo">Nuevo</ion-option>
+          <ion-option value="usado">Usado</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <button ion-button block (click)="presentActionSheet()">Agrega imagenes</button>
+      </ion-item>
+    </ion-list>
 
-  <div padding>
-    <button block>Continuar</button>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!donacion.valid">Continuar</button>
+    </div>
+  </form>
+
+  <!--<ion-list>
+    <ion-item *ngFor="let url from urls" >
+      <ion-label>url: {{url}}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="error">
+      <ion-label>{{error}}</ion-label>
+    </ion-item>
+  </ion-list>-->
+  <div *ngFor = "let image of images">
+    {{image}}
+    <img [src]="image" alt="">
+
   </div>
+
 </ion-content>

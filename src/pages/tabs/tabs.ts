@@ -3,7 +3,7 @@ import { HomePage } from '../home/home';
 import { NotificacionesPage } from '../notificaciones/notificaciones';
 import { PerfilPage } from '../perfil/perfil';
 import { NavController, NavParams, App } from 'ionic-angular';
-import { PreguntaPage } from '../pregunta/pregunta';
+//import { PreguntaPage } from '../pregunta/pregunta';
 @Component({
   templateUrl: 'tabs.html'
 })
