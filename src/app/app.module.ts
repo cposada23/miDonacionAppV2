@@ -6,6 +6,8 @@ import { ContactPage } from '../pages/contact/contact';
 
 /** Ionic native  */
 import { ImagePicker } from '@ionic-native/image-picker';
+/**https://github.com/Riron/ionic-img-viewer */
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 /** tabs */
 import { TabsPage } from '../pages/tabs/tabs';
@@ -60,6 +62,7 @@ import { RegistroPage } from '../pages/registro/registro';
   imports: [
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig, authConfig),
+    IonicImageViewerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
