@@ -6,6 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 
 /** Ionic native  */
 import { ImagePicker } from '@ionic-native/image-picker';
+import { File } from '@ionic-native/file';
 /**https://github.com/Riron/ionic-img-viewer */
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 
@@ -41,6 +42,8 @@ import { RegistroPage } from '../pages/registro/registro';
   import { CategoriaService } from '../providers/categoria-service';
   /**Donaciones */
   import { DonacionService } from '../providers/donacion-service';
+  /** Utils */
+  import { Utils } from '../providers/utils';
  
 
 @NgModule({
@@ -87,7 +90,9 @@ import { RegistroPage } from '../pages/registro/registro';
     Auth,
     CategoriaService,
     DonacionService,
-    ImagePicker
+    ImagePicker,
+    File,
+    Utils
   ]
 })
 export class AppModule {}

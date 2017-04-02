@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Donacion } from '../models/donacion';
+import { File } from '@ionic-native/file';
 import 'rxjs/add/operator/map';
 
 /*
@@ -13,7 +14,7 @@ import 'rxjs/add/operator/map';
 export class DonacionService {
   _donacion: Donacion;
   donacion:Object = {}
-  constructor(public http: Http) {
+  constructor(private filePlugin:File, public http: Http) {
     console.log('Hello DonacionService Provider');
   }
   setUsuario(nombre:string, key:string){
@@ -49,5 +50,15 @@ export class DonacionService {
       console.log(this.donacion);
     }
   }
+
+  subirImagenes(urls: Array<string>){
+    const url = urls[0];
+    
+  }
+
+  subirImagen(url:string){
+    
+  }
+
 
 }

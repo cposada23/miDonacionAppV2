@@ -44,4 +44,16 @@
       <button ion-button block type="submit" [disabled]="!donacion.valid">Continuar</button>
     </div>
   </form>
+
+  <div class="file-input-wrapper">
+        <button  ion-button round full>Seleccionar Archivo</button>
+        <input type="file" name="file"   (change) ="onChange($event)" />
+    </div>
+
+  <div padding>
+    <button ion-button (click) = "upload()"> subir</button>
+  </div>
+  <div class="padding">
+    <h1>{{error}}</h1>
+  </div>
 </ion-content>
