@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Donacion } from '../models/donacion';
 import { File } from '@ionic-native/file';
+import { Subject, Observable} from 'rxjs/Rx';
+import { FirebaseRef } from 'angularfire2/index';
 import 'rxjs/add/operator/map';
 
 /*
@@ -14,8 +16,9 @@ import 'rxjs/add/operator/map';
 export class DonacionService {
   _donacion: Donacion;
   donacion:Object = {}
-  constructor(private filePlugin:File, public http: Http) {
-    console.log('Hello DonacionService Provider');
+  sdkDb:any;
+  constructor(@Inject(FirebaseRef) fb,private filePlugin:File, public http: Http) {
+    this.sdkDb = fb.database().ref();
   }
   setUsuario(nombre:string, key:string){
     this.donacion['usuarioNombre'] = nombre;
@@ -34,10 +37,11 @@ export class DonacionService {
     this.donacion['subCategoriaKey'] = key;
     console.log("setSubCategoria", this.donacion);
   }
-  setDonacion(titulo:string, descripcion:string, estado:string, fotos:Array<File>){
+
+  setDonacion(titulo:string, descripcion:string, estado:string){
     this.donacion['titulo'] = titulo;
     this.donacion['descripcion'] = descripcion;
-    this.donacion['fotos'] = fotos;
+    this.donacion['estado'] = estado;
     console.log("this.donacion", this.donacion);
   }
 
@@ -45,19 +49,35 @@ export class DonacionService {
     return this.donacion;
   }
 
-  nuevaDonacion(){
+  nuevaDonacion(urls:Array<any>){
     if(this.donacion){
       console.log(this.donacion);
+      this.donacion['urlImagenes'] = urls;
+      this.donacion['fecha'] = new Date();
+      const usuarioKey = this.donacion['usuarioKey'];
+      const subCategoriaKey = this.donacion['subCategoriaKey'];
+      let dataToSave = {};
+      const donacionKey = this.sdkDb.child('donacionesBienes').push().key;
+      dataToSave[`donacionesBienesUsuario/${usuarioKey}/${donacionKey}`] = true;
+      dataToSave[`donacionesBienesPorSubCategoria/${subCategoriaKey}/${donacionKey}`] = true;
+      dataToSave[`donacionesBienes/${donacionKey}`] = this.donacion;
+      return this.firebaseUpdate(dataToSave); 
     }
   }
 
-  subirImagenes(urls: Array<string>){
-    const url = urls[0];
-    
-  }
-
-  subirImagen(url:string){
-    
+   firebaseUpdate(dataToSave){
+    const subject = new Subject();
+    this.sdkDb.update(dataToSave).then(
+      val=>{
+        subject.next(val);
+        subject.complete();
+      },
+      err=>{
+        subject.error(err);
+        subject.complete();
+      }
+    );
+    return subject.asObservable();
   }
 
 

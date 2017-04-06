@@ -12,22 +12,20 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Utils {
 
-  constructor(private filePlugin:File, public http: Http) {
-    console.log('Hello Utils Provider');
-  }
+  constructor(private filePlugin:File, public http: Http) {}
 
 
   getBlobFromUrl(url:string):Promise<any>{
     return new Promise((resolve, reject) => {
       this.filePlugin.resolveLocalFilesystemUrl(url).then((res:any) => {
-        alert(res.isFile);
+        //alert(res.isFile);
         res.file((resFile) => {
-          alert(resFile);
+          //alert(resFile);
           var reader = new FileReader();
           reader.onloadend = (evt:any) => {
             var imgBlob:any = new Blob([evt.target.result], {type: 'image/jpeg'});
             imgBlob.name = 'ejemplo.jpg';
-            alert(typeof(imgBlob));
+            //alert(typeof(imgBlob));
             resolve(imgBlob);
           }
           reader.onerror = (e) => {

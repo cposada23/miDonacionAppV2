@@ -22,6 +22,7 @@ import { SubcategoriasBienesPage } from '../pages/subcategorias-bienes/subcatego
 
 /** Nueva donacion */
 import { NuevaDonacionPage } from '../pages/nueva-donacion/nueva-donacion';
+import { ConfirmarDonacionPage } from '../pages/confirmar-donacion/confirmar-donacion';
 
 import { PreguntaPage }  from '../pages/pregunta/pregunta';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -60,7 +61,8 @@ import { RegistroPage } from '../pages/registro/registro';
     PreguntaPage,
     CategoriasBienesPage,
     SubcategoriasBienesPage,
-    NuevaDonacionPage
+    NuevaDonacionPage,
+    ConfirmarDonacionPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -81,7 +83,8 @@ import { RegistroPage } from '../pages/registro/registro';
     PreguntaPage,
     CategoriasBienesPage,
     SubcategoriasBienesPage,
-    NuevaDonacionPage
+    NuevaDonacionPage,
+    ConfirmarDonacionPage
   ],
   providers: [
     StatusBar,
