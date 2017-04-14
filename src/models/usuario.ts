@@ -10,12 +10,17 @@ export class Usuario {
         public celular: string,
         public admin:boolean,
         public genero: string,
+        public donacionesHechas: string,
+        public donacionesRecibidas: string,
+        public ciudadRecidencia:string
     ){}
 
     static fromJson(
         {$key, nombre, apellidos, email, picture,
-         cedula, celular, admin, genero}): Usuario{
+         cedula, celular, admin, genero, donacionesHechas,
+         donacionesRecibidas, ciudadRecidencia }): Usuario{
         return new Usuario($key, nombre, apellidos, email, picture,
-         cedula, celular, admin, genero);
+         cedula, celular, admin, genero, donacionesHechas,
+         donacionesRecibidas, ciudadRecidencia );
     }
 }

@@ -7,6 +7,7 @@ import { Auth } from '../../providers/auth';
 import { LoginPage } from '../login/login';
 import { DonacionService } from '../../providers/donacion-service';
 import { NuevaDonacionPage } from '../nueva-donacion/nueva-donacion';
+import { DonacionesBienesPage } from '../donaciones-bienes/donaciones-bienes';
 //import { BienesPage } from '../bienes/bienes';
 /*
   Generated class for the SubcategoriasBienes page.
@@ -78,7 +79,9 @@ export class SubcategoriasBienesPage {
         this.donacionService.setSubCategoria(subcategoria.nombre, subcategoria.$key);
         this.navCtrl.push(NuevaDonacionPage);
       }else{
-        console.log("beneficiario");
+        this.navCtrl.push(DonacionesBienesPage, {
+          subcategoria: subcategoria.$key
+        });
       }
     }else{
       console.log("no autenticado");

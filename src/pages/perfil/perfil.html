@@ -12,36 +12,36 @@
 <ion-content padding>
   <ion-card>
 
-    <img src="assets/img/defaultProfileMale.jpg">
+    <img src="assets/img/defaultProfileMale.jpg" imageViewer>
   
     
 
     <ion-item>
       <ion-icon name="contact" item-left large></ion-icon>
-      <h2>Nombre apellidos</h2>
-      <p>email</p>
+      <h2>{{usuario.nombre}} {{usuario.apellidos}}</h2>
+      <p>{{usuario.email}}</p>
     </ion-item>
 
     <ion-item>
       <ion-icon name="school" item-left large ></ion-icon>
       <h2>Ciudad</h2>
-      <p>Ciudad</p>
+      <p>{{usuario.ciudadRecidencia}}</p>
     </ion-item>
 
     <ion-item>
       <ion-icon name="people" item-left></ion-icon>
-      Donaciones
-      <ion-badge item-right>5</ion-badge>
+      Donaciones Hechas
+      <ion-badge item-right>{{usuario.donacionesHechas || 0}}</ion-badge>
     </ion-item>
 
     <ion-item>
       <ion-icon name="albums" item-left></ion-icon>
-      Beneficios
-      <ion-badge item-right>8</ion-badge>
+      Donaciones Recividas
+      <ion-badge item-right>{{usuario.donacionesRecibidas || 0}}</ion-badge>
     </ion-item>
 
     <ion-item>
-      <button ion-button icon-left clear item-right (click)="getUser()">
+      <button ion-button icon-left clear item-right>
         <ion-icon name="construct"></ion-icon>
         Editar
       </button>
@@ -49,10 +49,10 @@
 
   </ion-card>
 
-  <ion-card>
-    <img src="assets/img/deg1.png"/>
+  <ion-card (click)="irMisDonaciones()">
+    <img src="assets/img/donacion.jpg"/>
     <div class="card-title"><ion-badge color="dark"><font size="4">Mis Donaciones</font></ion-badge> </div>
-    <div class="card-subtitle"><ion-badge color="light" >4</ion-badge> </div>
+    <div class="card-subtitle"><ion-badge color="light" >{{usuario.donacionesHechas || 0}}</ion-badge> </div>
   </ion-card>
 
   <ion-card >

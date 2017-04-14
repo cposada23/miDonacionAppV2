@@ -1,6 +1,8 @@
 import { Injectable, Inject  } from '@angular/core';
 import { AngularFire, AngularFireDatabase, FirebaseRef  } from 'angularfire2'; 
 import { Usuario } from '../models/usuario';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of'
 @Injectable()
 export class Auth {
   usuario:Usuario;
@@ -13,6 +15,7 @@ export class Auth {
       if(auth){
         this.autenticado = true;
         this.getUsuarioActivo(auth.uid).subscribe(usuario=>{
+          console.log("usuario en auth", usuario);
           this.usuario = Usuario.fromJson(usuario);
         });
       }else{
@@ -26,6 +29,12 @@ export class Auth {
    }
    getUsuario():Usuario{
      return this.usuario;
+   }
+
+   getUser():Observable<any>{
+     if(this.usuario){
+       return this.db.object('usuarios/'+this.usuario.$key);
+     }
    }
 
    getUsuarioActivo(uid){
@@ -42,7 +51,7 @@ export class Auth {
 
    datosUsuario():Object{
      const usuario = {
-      nombre: this.usuario.nombre,
+      nombre: this.usuario.nombre + ' ' + this.usuario.apellidos,
       key: this.usuario.$key
      }
      return usuario;

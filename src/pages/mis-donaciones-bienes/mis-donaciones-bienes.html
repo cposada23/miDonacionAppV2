@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ConfirmarDonacion page.
+  Generated template for the MisDonacionesBienes page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,35 +7,31 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title>Confirmar Donacion</ion-title>
+    <ion-title>mis Donaciones Bienes</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding style="background-image: url(assets/img/deg3.png); background-repeat: no-repeat;background-size:cover;">
-  <ion-card>
-
+<ion-content padding>
+  <ion-card *ngFor="let donacion of misDonaciones$ | async"> 
     <ion-item>
       <ion-avatar item-left>
         <img src="assets/img/defaultProfileMale.jpg">
       </ion-avatar>
-      <h2>{{nombreUsuario}}</h2>
-      <p>{{fecha | date}}</p>
+      <h2>{{donacion.usuarioNombre}}</h2>
+      <p>{{donacion.fecha | date}}</p>
     </ion-item>
-
-    <div *ngIf="imagenes">
+    <div *ngIf="donacion.urlImagenes">
       <ion-row>
-        <ion-col col-4 *ngFor = 'let img of imagenes'>
+        <ion-col col-4 *ngFor = 'let img of donacion.urlImagenes'>
           <img [src]="img" imageViewer>
         </ion-col>
       </ion-row>
     </div>
-
     <ion-card-content>
       <p>{{donacion.descripcion}}</p>
     </ion-card-content>
-
     <ion-item>
       <ion-icon name="apps" item-left></ion-icon>
       Categoria:
@@ -46,14 +42,9 @@
       Sub-Categoria:
       <ion-badge item-right>{{donacion.subCategoriaNombre}}</ion-badge>
     </ion-item>
-
     <ion-item>
-      <button ion-button full icon-right (click)="confirmar()">
-        Confirmar
-        <ion-icon name="home"></ion-icon>
-      </button>
+      <ion-icon name="albums" item-left></ion-icon>
+      <ion-badge item-right>{{donacion.estado}}</ion-badge>
     </ion-item>
-
-  </ion-card>
-
+  </ion-card> 
 </ion-content>

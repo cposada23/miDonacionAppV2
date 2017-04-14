@@ -24,6 +24,12 @@ import { SubcategoriasBienesPage } from '../pages/subcategorias-bienes/subcatego
 import { NuevaDonacionPage } from '../pages/nueva-donacion/nueva-donacion';
 import { ConfirmarDonacionPage } from '../pages/confirmar-donacion/confirmar-donacion';
 
+/**Donaciones */
+import { MisDonacionesPage } from '../pages/mis-donaciones/mis-donaciones';
+import { MisDonacionesBienesPage }  from '../pages/mis-donaciones-bienes/mis-donaciones-bienes';
+import { DonacionesBienesPage } from '../pages/donaciones-bienes/donaciones-bienes';
+
+import { MisDonacionesServiciosPage } from '../pages/mis-donaciones-servicios/mis-donaciones-servicios'; 
 import { PreguntaPage }  from '../pages/pregunta/pregunta';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -62,7 +68,11 @@ import { RegistroPage } from '../pages/registro/registro';
     CategoriasBienesPage,
     SubcategoriasBienesPage,
     NuevaDonacionPage,
-    ConfirmarDonacionPage
+    ConfirmarDonacionPage,
+    MisDonacionesPage,
+    MisDonacionesBienesPage,
+    DonacionesBienesPage,
+    MisDonacionesServiciosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -84,7 +94,11 @@ import { RegistroPage } from '../pages/registro/registro';
     CategoriasBienesPage,
     SubcategoriasBienesPage,
     NuevaDonacionPage,
-    ConfirmarDonacionPage
+    ConfirmarDonacionPage,
+    MisDonacionesPage,
+    MisDonacionesBienesPage,
+    DonacionesBienesPage,
+    MisDonacionesServiciosPage
   ],
   providers: [
     StatusBar,

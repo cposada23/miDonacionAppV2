@@ -1,8 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { DonacionService } from '../../providers/donacion-service';
 import { Utils } from '../../providers/utils';
-import { FirebaseRef } from 'angularfire2/index'
+import { FirebaseRef } from 'angularfire2/index';
+import { Usuario } from '../../models/usuario';
+import { Auth } from '../../providers/auth';
+import { HomePage } from '../home/home';
 /*
   Generated class for the ConfirmarDonacion page.
 
@@ -19,17 +22,22 @@ export class ConfirmarDonacionPage {
   nombreUsuario:string;
   fecha:Date;
   storage: any;
-  constructor(@Inject(FirebaseRef) fb,private utils: Utils, public navCtrl: NavController, private donacionService:DonacionService, public navParams: NavParams) {
+  usuario:Usuario;
+  loader:any;
+  constructor(public loadingCtrl:LoadingController, private auth:Auth, @Inject(FirebaseRef) fb,private utils: Utils, public navCtrl: NavController, private donacionService:DonacionService, public navParams: NavParams) {
     this.storage = fb.storage().ref();
     this.donacion = this.donacionService.getDonacion();
     this.nombreUsuario = this.donacion['usuarioNombre'];
     this.imagenes = this.navParams.get('imagenes');
     this.fecha = new Date();
+    this.usuario = this.auth.getUsuario();
+    console.log("usuario activo para realizar donacion", this.usuario);
   }
 
   ionViewDidLoad() {}
 
   confirmar(){
+    this.presentloading();
     if(this.imagenes){
       let promesas = this.imagenes.map((url) => {
         return new Promise((resolve, reject) => {
@@ -37,11 +45,10 @@ export class ConfirmarDonacionPage {
         });
       });
       Promise.all(promesas).then((res) =>{ 
-        alert('imagenes subidasssss');
-        //alert(res);
         this.crearDonacion(res);
       }).catch((error) =>{
-        alert('Ocurrio un error subiendo imagenes')
+        alert('Ocurrio un error subiendo imagenes');
+        this.loader.dismiss();
       });
     }else{
       this.crearDonacion(null);
@@ -49,10 +56,12 @@ export class ConfirmarDonacionPage {
   }
 
   crearDonacion(urls:Array<any>){
-    alert('creando donacionmmmnnnn');
     this.donacionService.nuevaDonacion(urls).subscribe(() => {
+      this.loader.dismiss();
       alert('donacionCreada');
+      this.navCtrl.push(HomePage);
     },(error) => {
+      this.loader.dismiss();
       alert('Error creando donacion');
     });
   } 
@@ -67,7 +76,7 @@ export class ConfirmarDonacionPage {
     const nombre = url.split('/').pop();
     this.utils.getBlobFromUrl(url).then((blob) => {
       try {
-        let uploadTask = this.storage.child('images/'+nombre).put(blob);
+        let uploadTask = this.storage.child('images/donacionBienes/'+this.usuario.$key+'/'+nombre).put(blob);
         uploadTask.on('state_changed', 
             (snapshot)=>{
           },
@@ -130,6 +139,13 @@ export class ConfirmarDonacionPage {
       });
     });
     
+  }
+
+  presentloading(){
+    this.loader = this.loadingCtrl.create({
+      content:"Creando donacion..."
+    });
+    this.loader.present();
   }
 
 }
