@@ -77,8 +77,7 @@ export class DonacionService {
 
   getDonacionesBienesKeysPorSubcategoria(subcategoria:string): Observable<string[]>{
     // dspsc : Donaciones por subcategoria
-    // dpsc  : Donación por subcategoria
-
+    // dpsc  : Donación por subcategoria 
     return this.angularFireDatabase.list(`donacionesBienesPorSubCategoria/${subcategoria}`,
       {
         query:{
@@ -102,7 +101,7 @@ export class DonacionService {
     return this.getDonacionesBienesPorDonacionKey(this.getDonacionesBienesKeysPorSubcategoria(subcategoria));
   }
 
-   firebaseUpdate(dataToSave){
+  firebaseUpdate(dataToSave){
     const subject = new Subject();
     this.sdkDb.update(dataToSave).then(
       val=>{
