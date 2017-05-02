@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DonacionService {
   donacion:Object = {}
+  donacionServicio:Object = {};
   sdkDb:any;
   constructor(private angularFireDatabase: AngularFireDatabase, @Inject(FirebaseRef) fb) {
     this.sdkDb = fb.database().ref();
@@ -21,6 +22,8 @@ export class DonacionService {
   setUsuario(nombre:string, key:string){
     this.donacion['usuarioNombre'] = nombre;
     this.donacion['usuarioKey'] = key;
+    this.donacionServicio['usuarioNombre'] = nombre;
+    this.donacionServicio['usuarioKey'] = key;
   }
 
   setCategoria(nombre:string, key:string){
@@ -37,6 +40,11 @@ export class DonacionService {
     this.donacion['titulo'] = titulo;
     this.donacion['descripcion'] = descripcion;
     this.donacion['estado'] = estado;
+  }
+
+  setCategoriaServicio(nombre: string, key: string) {
+    this.donacionServicio['categoriaNombre'] = nombre;
+    this.donacionServicio['categoriaKey'] = key;
   }
 
   clear(){
@@ -61,6 +69,20 @@ export class DonacionService {
       dataToSave[`donacionesBienes/${donacionKey}`] = this.donacion;
       return this.firebaseUpdate(dataToSave); 
     }
+  }
+
+  nuevaDonacionServicio(titulo: string, descripcion: string) {
+    this.donacionServicio['titulo'] = titulo;
+    this.donacionServicio['descripcion'] = descripcion;
+    this.donacionServicio['reversed'] = 0 - Date.now();
+    const usuarioKey = this.donacionServicio['usuarioKey'];
+    const categoria = this.donacionServicio['categoriaKey'];
+    const donacionKey = this.sdkDb.child('donacionesServicios').push().key;
+    let dataToSave = {};
+    dataToSave[`donacionesServiciosUsuario/${usuarioKey}/${donacionKey}`] = {'reversed': 0 - Date.now()};
+    dataToSave[`donacionesServiciosPorCategoria/${categoria}/${donacionKey}`] = {'reversed': 0 - Date.now()};
+    dataToSave[`donacionesServicios/${donacionKey}`] = this.donacionServicio;
+    return this.firebaseUpdate(dataToSave);
   }
 
   getDonacionesBienesKeysPorUsuario(usuarioKey:string): Observable<string[]>{
@@ -101,6 +123,60 @@ export class DonacionService {
     return this.getDonacionesBienesPorDonacionKey(this.getDonacionesBienesKeysPorSubcategoria(subcategoria));
   }
 
+
+  /**Donaciones servicios */
+  getDonacionesServiciosKeysPorCategoria(categoria:string): Observable<string[]>{
+    // dspc : Donaciones por categoria
+    // dpc  : Donación por categoria 
+    return this.angularFireDatabase.list(`donacionesServiciosPorCategoria/${categoria}`,
+      {
+        query:{
+          orderByChild:'reversed'
+        }
+      }).map(dspc => dspc.map(dpc => dpc.$key));
+  }
+
+  getDonacionesServiciosPorDonacionKey(keys$: Observable<string[]>):Observable<any[]> {
+    // dss : Donaciones servicio
+    // ds  : Donación por servicio
+    return keys$.map(dss => dss.map(ds => this.angularFireDatabase.object(`donacionesServicios/${ds}`)))
+      .flatMap(fbojs => Observable.combineLatest(fbojs));
+  }
+
+
+  getDonacionesServiciosPorCategoria(categoria: string):Observable<any[]> {
+    // return this.getDonacionesBienesPorDonacionKey(this.getDonacionesBienesKeysPorSubcategoria(subcategoria));
+    return this.getDonacionesServiciosPorDonacionKey(this.getDonacionesServiciosKeysPorCategoria(categoria));
+  }
+
+  /**
+   * Se aumenta el numero de donaciones hechas por un usuario 
+   * cada ves que este realiza una nueva donacion
+   */
+  aumentarDonacionesBienes(usuarioKey:string) {
+    this.sdkDb.child(`usuarios/${usuarioKey}/donacionesHechas`).transaction(function(data) {
+      data ++;
+      return data;
+    });
+
+    this.sdkDb.child(`usuarios/${usuarioKey}/donacionesBienes`).transaction(function(data) {
+      data ++;
+      return data;
+    });
+  }
+
+
+  aumentarDonacionesServicios(usuarioKey:string) {
+    this.sdkDb.child(`usuarios/${usuarioKey}/donacionesHechas`).transaction(function(data) {
+      data ++;
+      return data;
+    });
+
+    this.sdkDb.child(`usuarios/${usuarioKey}/donacionesServicios`).transaction(function(data) {
+      data ++;
+      return data;
+    });
+  }
   firebaseUpdate(dataToSave){
     const subject = new Subject();
     this.sdkDb.update(dataToSave).then(

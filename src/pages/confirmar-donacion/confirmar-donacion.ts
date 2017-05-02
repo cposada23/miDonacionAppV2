@@ -59,6 +59,7 @@ export class ConfirmarDonacionPage {
     this.donacionService.nuevaDonacion(urls).subscribe(() => {
       this.loader.dismiss();
       alert('donacionCreada');
+      this.donacionService.aumentarDonacionesBienes(this.usuario.$key);
       this.navCtrl.push(HomePage);
     },(error) => {
       this.loader.dismiss();

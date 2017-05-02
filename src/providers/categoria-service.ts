@@ -4,6 +4,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase, FirebaseRef, AngularFire } from 'angularfire2';
 import { CategoriaBienes } from '../models/categoriasBienes';
+import { CategoriaServicio } from '../models/categoriaServicio';
 import 'rxjs/add/operator/map';
 @Injectable()
 export class CategoriaService {
@@ -14,6 +15,9 @@ export class CategoriaService {
 
   getCategoriasBienes(){
     return this.db.list('categoriasBienes').map(CategoriaBienes.fromjsonArray)
+  }
+  getCategoriasServicios(){
+    return this.db.list('categoriasServicios').map(CategoriaServicio.fromjsonArray)
   }
 
   getCategoriaBienesPorNombre(nombre:string):Observable<CategoriaBienes>{
@@ -53,4 +57,7 @@ export class CategoriaService {
   getSubCategoriasPorCategoria(categoriaId:string):Observable<any[]>{
     return this.getSubCategoriasPorSubCategoriaKey(this.getSubCategoriasKeysPorCategoria(categoriaId));
   }
+
+
+  
 }

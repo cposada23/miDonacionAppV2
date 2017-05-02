@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CategoriasBienesPage } from '../categorias-bienes/categorias-bienes';
+import { CategoriasServiciosPage } from '../categorias-servicios/categorias-servicios';
 import { DonacionService } from '../../providers/donacion-service';
 import { Auth } from '../../providers/auth';
 /*
@@ -36,6 +37,12 @@ export class PreguntaPage {
   }
    irCategoriasBienes(){
     this.navCtrl.push(CategoriasBienesPage, {
+      perfil: this.perfil
+    });
+  }
+
+  irServicios() {
+    this.navCtrl.push(CategoriasServiciosPage, {
       perfil: this.perfil
     });
   }

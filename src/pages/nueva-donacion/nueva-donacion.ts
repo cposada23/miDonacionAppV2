@@ -86,11 +86,22 @@ export class NuevaDonacionPage {
 
   continuar(){
     //alert('undi continuar');
+    /*if(this.images) {
+      const donacionValue = this.donacion.value;
+      this.donacionService.setDonacion(donacionValue.titulo, donacionValue.descripcion, donacionValue.estado);
+      this.navCtrl.push(ConfirmarDonacionPage, {
+        imagenes: this.images
+      });
+    }else {
+      alert('Agrega almenos una imagen');
+    }*/
     const donacionValue = this.donacion.value;
     this.donacionService.setDonacion(donacionValue.titulo, donacionValue.descripcion, donacionValue.estado);
     this.navCtrl.push(ConfirmarDonacionPage, {
       imagenes: this.images
     });
+
+    
 
   }
 

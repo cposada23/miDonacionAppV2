@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, App } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { ToastController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
+import { TabsPage } from '../tabs/tabs';
 
 /*
   Generated class for the Registro page.
@@ -17,7 +18,7 @@ import { Auth } from '../../providers/auth';
 export class RegistroPage {
   form: FormGroup;
   loader:any;
-  constructor(public auth:Auth, public loadingCtrl:LoadingController, public navCtrl: NavController, public navParams: NavParams, public formBuilder:FormBuilder, public toastCtrl:ToastController) {
+  constructor(private app: App, public auth:Auth, public loadingCtrl:LoadingController, public navCtrl: NavController, public navParams: NavParams, public formBuilder:FormBuilder, public toastCtrl:ToastController) {
     this.form = this.formBuilder.group({
       email:     ['', Validators.required],
       password:  ['', Validators.required],
@@ -26,7 +27,8 @@ export class RegistroPage {
       apellidos: ['', Validators.required],
       cedula:['', Validators.required],
       celular: ['', Validators.required],
-      genero: ['', Validators.required]
+      genero: ['', Validators.required],
+      ciudadRecidencia: ['', Validators.required]
     });
   }
 
@@ -49,10 +51,15 @@ export class RegistroPage {
           cedula: usuario.cedula,
           celular: usuario.celular,
           genero: usuario.genero,
+          donacionesHechas:0,
+          donacionesRecibidas: 0,
+          donacionesBienes:0,
+          donacionesServicios:0,
+          ciudadRecidencia: usuario.ciudadRecidencia
         }
         this.auth.guardarUsuario(u, auth.uid).then(()=>{
-          
-         
+          this.loader.dismiss();
+          this.app.getRootNav().setRoot(TabsPage);
 
         }).catch(error=>{
           console.error(error);

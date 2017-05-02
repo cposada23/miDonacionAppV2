@@ -20,14 +20,19 @@ import { PerfilPage } from '../pages/perfil/perfil';
 import { CategoriasBienesPage } from '../pages/categorias-bienes/categorias-bienes';
 import { SubcategoriasBienesPage } from '../pages/subcategorias-bienes/subcategorias-bienes';
 
+/**Categorias servicios */
+import { CategoriasServiciosPage } from '../pages/categorias-servicios/categorias-servicios'; 
+
 /** Nueva donacion */
 import { NuevaDonacionPage } from '../pages/nueva-donacion/nueva-donacion';
 import { ConfirmarDonacionPage } from '../pages/confirmar-donacion/confirmar-donacion';
-
+import { NuevaDonacionServicioPage } from '../pages/nueva-donacion-servicio/nueva-donacion-servicio'; 
 /**Donaciones */
 import { MisDonacionesPage } from '../pages/mis-donaciones/mis-donaciones';
 import { MisDonacionesBienesPage }  from '../pages/mis-donaciones-bienes/mis-donaciones-bienes';
 import { DonacionesBienesPage } from '../pages/donaciones-bienes/donaciones-bienes';
+import { DonacionesServiciosPage } from '../pages/donaciones-servicios/donaciones-servicios';
+
 
 import { MisDonacionesServiciosPage } from '../pages/mis-donaciones-servicios/mis-donaciones-servicios'; 
 import { PreguntaPage }  from '../pages/pregunta/pregunta';
@@ -72,7 +77,10 @@ import { RegistroPage } from '../pages/registro/registro';
     MisDonacionesPage,
     MisDonacionesBienesPage,
     DonacionesBienesPage,
-    MisDonacionesServiciosPage
+    MisDonacionesServiciosPage,
+    CategoriasServiciosPage,
+    DonacionesServiciosPage,
+    NuevaDonacionServicioPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -98,7 +106,10 @@ import { RegistroPage } from '../pages/registro/registro';
     MisDonacionesPage,
     MisDonacionesBienesPage,
     DonacionesBienesPage,
-    MisDonacionesServiciosPage
+    MisDonacionesServiciosPage,
+    CategoriasServiciosPage,
+    DonacionesServiciosPage,
+    NuevaDonacionServicioPage
   ],
   providers: [
     StatusBar,

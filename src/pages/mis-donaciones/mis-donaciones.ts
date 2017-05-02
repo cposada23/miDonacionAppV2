@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MisDonacionesBienesPage } from '../mis-donaciones-bienes/mis-donaciones-bienes';
+import { Usuario } from '../../models/usuario';
+import { Auth } from '../../providers/auth';
 /*
   Generated class for the MisDonaciones page.
 
@@ -13,10 +15,17 @@ import { MisDonacionesBienesPage } from '../mis-donaciones-bienes/mis-donaciones
 })
 export class MisDonacionesPage {
   key:string;
-  constructor( public navCtrl: NavController, public navParams: NavParams) {}
+  usuario:Usuario;
+  constructor(private auth:Auth, public navCtrl: NavController, public navParams: NavParams) {
+    this.key = this.navParams.get('key');
+    this.auth.getUser().subscribe(usuario => {
+      console.log("usuarioasdfasfsaf en perfil:: ", usuario);
+      this.usuario = Usuario.fromJson(usuario);     
+    });
+  }
 
   ionViewDidLoad() {
-    this.key = this.navParams.get('key');
+    
   }
 
   irMisDonaciones(){  
