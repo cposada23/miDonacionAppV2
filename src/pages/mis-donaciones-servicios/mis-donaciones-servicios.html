@@ -7,12 +7,31 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>misDonacionesServicios</ion-title>
+    <ion-title>mis Donaciones Servicios</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-card *ngFor="let donacion of misDonaciones$ | async"> 
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="assets/img/defaultProfileMale.jpg">
+      </ion-avatar>
+      <h2>{{donacion.usuarioNombre}}</h2>
+      <p>{{donacion.fecha | date}}</p>
+    </ion-item>
+    <ion-item>
+      <h1>{{donacion.titulo}}</h1>
+    </ion-item>
+    <ion-card-content>
+      <p>{{donacion.descripcion}}</p>
+    </ion-card-content>
+    <ion-item>
+      <ion-icon name="apps" item-left></ion-icon>
+      Categoria:
+      <ion-badge item-right>{{donacion.categoriaNombre}}</ion-badge>
+    </ion-item>
+  </ion-card> 
 </ion-content>

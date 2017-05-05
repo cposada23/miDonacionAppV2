@@ -80,7 +80,8 @@ export class SubcategoriasBienesPage {
         this.navCtrl.push(NuevaDonacionPage);
       }else{
         this.navCtrl.push(DonacionesBienesPage, {
-          subcategoria: subcategoria.$key
+          subcategoria: subcategoria.$key,
+          nombreSubcategoria: subcategoria.nombre
         });
       }
     }else{

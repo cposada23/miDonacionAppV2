@@ -14,6 +14,10 @@
 
 
 <ion-content padding>
+  
+  <ion-card>
+    {{nombreSubcategoria}}
+  </ion-card>
   <ion-card *ngFor="let donacion of donaciones$ | async"> 
     <ion-item>
       <ion-avatar item-left>
@@ -21,6 +25,9 @@
       </ion-avatar>
       <h2>{{donacion.usuarioNombre}}</h2>
       <p>{{donacion.fecha | date}}</p>
+    </ion-item>
+    <ion-item>
+      <h1>{{donacion.titulo}}</h1>
     </ion-item>
     <div *ngIf="donacion.urlImagenes">
       <ion-row>
@@ -44,6 +51,9 @@
           <ion-badge>{{donacion.estado}}</ion-badge>
         </ion-col>
       </ion-row>
+    </ion-item>
+    <ion-item>
+      <button ion-button full (click)="irContacto(donacion)" *ngIf="donacion.usuarioKey !== keyUsuario">Contactar</button>
     </ion-item>
   </ion-card> 
 </ion-content>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { DonacionService } from '../../providers/donacion-service';
+import { Observable } from 'rxjs/Rx';
 
 /*
   Generated class for the MisDonacionesServicios page.
@@ -13,10 +15,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MisDonacionesServiciosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  misDonaciones$: Observable<any[]>;
+  constructor(private donacionService: DonacionService, public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MisDonacionesServiciosPage');
+     const key = this.navParams.get('key');
+     this.misDonaciones$ = this.donacionService.misDonacionesServicios(key);
+  
   }
 
 }

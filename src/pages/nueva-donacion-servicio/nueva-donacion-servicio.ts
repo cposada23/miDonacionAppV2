@@ -19,12 +19,15 @@ export class NuevaDonacionServicioPage {
   donacion: FormGroup;
   loader:any;
   usuario:Usuario;
+  datosDonacion: Object;
   constructor(private auth:Auth, public loadingCtrl: LoadingController,  private donacionService:DonacionService,    private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.usuario = this.auth.getUsuario();
     this.donacion = this.formBuilder.group({
       titulo:['', Validators.required],
       descripcion: ['', Validators.required]
     });
+
+    this.datosDonacion = this.donacionService.getDonacionServicio();
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad NuevaDonacionServicioPage');

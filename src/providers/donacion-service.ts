@@ -55,6 +55,10 @@ export class DonacionService {
     return this.donacion;
   }
 
+  getDonacionServicio(): Object {
+    return this.donacionServicio;
+  }
+
   nuevaDonacion(urls:Array<any>){
     if(this.donacion){
       this.donacion['urlImagenes'] = urls;
@@ -119,6 +123,22 @@ export class DonacionService {
     return this.getDonacionesBienesPorDonacionKey(this.getDonacionesBienesKeysPorUsuario(usuarioKey));
   }
 
+  getDonacionesServiciosKeysPorUsuario(usuarioKey: string): Observable<string[]>{
+    // dspu : Donaciones por usuario
+    // dpu  : Donación por usuario
+    return this.angularFireDatabase.list(`donacionesServiciosUsuario/${usuarioKey}`,
+      {
+        query:{
+          orderByChild:'reversed'
+        }
+      }).map(dspu => dspu.map(dpu => dpu.$key));
+
+  }
+  
+  misDonacionesServicios(usuarioKey: string): Observable<any[]> {
+    return this.getDonacionesServiciosPorDonacionKey(this.getDonacionesServiciosKeysPorUsuario(usuarioKey));
+  }
+
   getDonacionesPorSubcategoria(subcategoria: string): Observable<any[]>{
     return this.getDonacionesBienesPorDonacionKey(this.getDonacionesBienesKeysPorSubcategoria(subcategoria));
   }
@@ -177,6 +197,23 @@ export class DonacionService {
       return data;
     });
   }
+
+  contacto(usuarioKey: string, nombreUsuario: string, donacionKey: string, donanteKey: string,
+           mensaje: string)
+  {
+    let contactoBienes = {
+      contacta: usuarioKey,
+      nombreBeneficiario: nombreUsuario,
+      donacionKey: donacionKey,
+      reversed: 0 - Date.now(),
+      mensaje: mensaje
+    }
+    console.log("contactoBiene", contactoBienes);
+    let dataToSave = {};
+    dataToSave[`contactoBienes/${donacionKey}`] = contactoBienes;
+    return this.firebaseUpdate(dataToSave);
+  }
+
   firebaseUpdate(dataToSave){
     const subject = new Subject();
     this.sdkDb.update(dataToSave).then(

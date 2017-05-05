@@ -22,6 +22,9 @@
       <h2>{{donacion.usuarioNombre}}</h2>
       <p>{{donacion.fecha | date}}</p>
     </ion-item>
+    <ion-item>
+      <h1>{{donacion.titulo}}</h1>
+    </ion-item>
     <div *ngIf="donacion.urlImagenes">
       <ion-row>
         <ion-col col-4 *ngFor = 'let img of donacion.urlImagenes'>
@@ -44,6 +47,7 @@
     </ion-item>
     <ion-item>
       <ion-icon name="albums" item-left></ion-icon>
+      estado:
       <ion-badge item-right>{{donacion.estado}}</ion-badge>
     </ion-item>
   </ion-card> 

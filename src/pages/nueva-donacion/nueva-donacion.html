@@ -12,10 +12,10 @@
   <form autocomplete="off" novalidate [formGroup]="donacion" >
     <ion-list>
       <ion-item>
-        <ion-label>Categoria: </ion-label>
+        <ion-label>Categoria: {{datosDonacion.categoriaNombre}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>Subcategoria: </ion-label>
+        <ion-label>Subcategoria: {{datosDonacion.subCategoriaNombre}}</ion-label>
       </ion-item>
 
       <ion-item>
@@ -51,18 +51,4 @@
       <button ion-button block type="submit" [disabled]="!donacion.valid" (click)="continuar()">Continuar</button>
     </div>
   </form>
-
-  
-
-  <!--<div class="file-input-wrapper">
-        <button  ion-button round full>Seleccionar Archivo</button>
-        <input type="file" name="file"   (change) ="onChange($event)" />
-    </div>-->
-
-  <!--<div padding>
-    <button ion-button (click) = "upload()"> subir</button>
-  </div>
-  <div class="padding">
-    <h1>{{error}}</h1>
-  </div>-->
 </ion-content>

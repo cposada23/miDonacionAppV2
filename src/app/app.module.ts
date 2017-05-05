@@ -33,6 +33,9 @@ import { MisDonacionesBienesPage }  from '../pages/mis-donaciones-bienes/mis-don
 import { DonacionesBienesPage } from '../pages/donaciones-bienes/donaciones-bienes';
 import { DonacionesServiciosPage } from '../pages/donaciones-servicios/donaciones-servicios';
 
+/** Contacto */
+import { ContactoBienesPage } from '../pages/contacto-bienes/contacto-bienes';
+
 
 import { MisDonacionesServiciosPage } from '../pages/mis-donaciones-servicios/mis-donaciones-servicios'; 
 import { PreguntaPage }  from '../pages/pregunta/pregunta';
@@ -80,7 +83,8 @@ import { RegistroPage } from '../pages/registro/registro';
     MisDonacionesServiciosPage,
     CategoriasServiciosPage,
     DonacionesServiciosPage,
-    NuevaDonacionServicioPage
+    NuevaDonacionServicioPage,
+    ContactoBienesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -109,7 +113,8 @@ import { RegistroPage } from '../pages/registro/registro';
     MisDonacionesServiciosPage,
     CategoriasServiciosPage,
     DonacionesServiciosPage,
-    NuevaDonacionServicioPage
+    NuevaDonacionServicioPage,
+    ContactoBienesPage
   ],
   providers: [
     StatusBar,

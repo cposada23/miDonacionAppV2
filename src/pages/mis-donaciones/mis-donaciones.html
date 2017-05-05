@@ -19,7 +19,7 @@
     <div class="card-title"><ion-badge color="dark"><font size="4">Donaciones Bienes</font></ion-badge> </div>
     <div class="card-subtitle"><ion-badge color="light" >{{usuario.donacionesBienes}}</ion-badge> </div>
   </ion-card>  
-  <ion-card >
+  <ion-card (click) = "irMisDonacionesServicios()">
     <img src="assets/img/deg1.png"/>
     <div class="card-title"><ion-badge color="dark"><font size="4">Donaciones Servicios</font></ion-badge> </div>
     <div class="card-subtitle"><ion-badge color="light" >{{usuario.donacionesServicios}}</ion-badge> </div>

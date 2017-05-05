@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MisDonacionesBienesPage } from '../mis-donaciones-bienes/mis-donaciones-bienes';
+import { MisDonacionesServiciosPage } from '../mis-donaciones-servicios/mis-donaciones-servicios';
 import { Usuario } from '../../models/usuario';
 import { Auth } from '../../providers/auth';
 /*
@@ -31,6 +32,11 @@ export class MisDonacionesPage {
   irMisDonaciones(){  
     this.navCtrl.push(MisDonacionesBienesPage, {
       key:this.key
+    });
+  }
+  irMisDonacionesServicios() {
+    this.navCtrl.push(MisDonacionesServiciosPage, {
+      key: this.key
     });
   }
 

@@ -24,7 +24,7 @@ export class NuevaDonacionPage {
   urls:Array<string>
   error: string;
   images:Array<string>;
-
+  datosDonacion: Object;
   constructor(private donacionService:DonacionService, private utils:Utils,  private actionSheetCtrl:ActionSheetController, private imagePicker:ImagePicker, private formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
  
     this.donacion = this.formBuilder.group({
@@ -32,6 +32,8 @@ export class NuevaDonacionPage {
       descripcion: ['', Validators.required],
       estado:['',Validators.required]
     });
+
+    this.datosDonacion = this.donacionService.getDonacion();
   }
 
   ionViewDidLoad() {}
@@ -86,7 +88,7 @@ export class NuevaDonacionPage {
 
   continuar(){
     //alert('undi continuar');
-    /*if(this.images) {
+    if(this.images) {
       const donacionValue = this.donacion.value;
       this.donacionService.setDonacion(donacionValue.titulo, donacionValue.descripcion, donacionValue.estado);
       this.navCtrl.push(ConfirmarDonacionPage, {
@@ -94,12 +96,12 @@ export class NuevaDonacionPage {
       });
     }else {
       alert('Agrega almenos una imagen');
-    }*/
-    const donacionValue = this.donacion.value;
-    this.donacionService.setDonacion(donacionValue.titulo, donacionValue.descripcion, donacionValue.estado);
-    this.navCtrl.push(ConfirmarDonacionPage, {
-      imagenes: this.images
-    });
+    }
+    // const donacionValue = this.donacion.value;
+    // this.donacionService.setDonacion(donacionValue.titulo, donacionValue.descripcion, donacionValue.estado);
+    // this.navCtrl.push(ConfirmarDonacionPage, {
+    //   imagenes: this.images
+    // });
 
     
 
