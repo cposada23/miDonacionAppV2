@@ -48,6 +48,7 @@ export class LoginPage {
     const formValue = this.form.value;
     this.presentloading();
     this.auth.login(formValue.email, formValue.password).then(auth=>{
+      console.log("auth", auth.auth.getToken());
       this.loader.dismiss();
       this.presentToast('Login correcto');
       this.app.getRootNav().setRoot(TabsPage,{
