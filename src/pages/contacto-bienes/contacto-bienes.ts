@@ -38,6 +38,7 @@ export class ContactoBienesPage {
     this.donacionService.contacto(this.usuario.$key, this.usuario.nombre + ' ' + this.usuario.apellidos,
       this.donacion['$key'], this.donacion['usuarioKey'], mensaje ).subscribe(() => {
         alert("contacto creado");
+        this.navCtrl.pop();
       },error => {
         alert('error');
         console.error(error);

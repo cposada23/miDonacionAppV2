@@ -1,5 +1,6 @@
 import { Injectable, Inject  } from '@angular/core';
 import { AngularFire, AngularFireDatabase, FirebaseRef  } from 'angularfire2'; 
+import { ToastController } from 'ionic-angular';
 import { Usuario } from '../models/usuario';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of'
@@ -9,15 +10,35 @@ export class Auth {
   autenticado:boolean = false;
   sdk:any;
   perfil:string;
-  constructor(@Inject(FirebaseRef) fb ,private af: AngularFire, private db: AngularFireDatabase) {
+  ref: any;
+  constructor(private toastCtrl: ToastController, @Inject(FirebaseRef) fb ,private af: AngularFire, private db: AngularFireDatabase) {
     this.sdk = fb.database().ref();
     this.af.auth.subscribe(auth => {
       if(auth){
         this.autenticado = true;
         this.getUsuarioActivo(auth.uid).subscribe(usuario=>{
-          console.log("usuario en auth", usuario);
+          console.log("usuario en authhhhhh", usuario);
           this.usuario = Usuario.fromJson(usuario);
+
+          this.ref = fb.database().ref('notificaciones/'+auth.uid);
+          this.ref.on('child_added', (data) => {
+            console.log("data: ", data.val());
+            
+            this.notificar();
+            
+          });
+          // setInterval(() => {
+          //     this.notificar();
+          // }, 10000);
+          // var ref = this.db.list(`/notificaciones/${auth.uid}`);
+          // ref.$ref.on("child_added", (child) => {
+          //   console.log("child addedd", child);
+          //   this.notificar();
+          // });
+        
         });
+
+
       }else{
         this.autenticado = false;
       }
@@ -64,6 +85,7 @@ export class Auth {
    logout(){
      
      this.usuario = null;
+     this.ref.off();
      return this.af.auth.logout();
    }
 
@@ -73,6 +95,20 @@ export class Auth {
 
    registro(email, password){
     return this.af.auth.createUser({email,password});
+  }
+
+  puedeContactarBienes(donacionKey:string, usuarioKey: string): Observable<any> {
+    return this.db.object(`misContactosPorDonaciones/${usuarioKey}/${donacionKey}`);
+  }
+
+  notificar() {
+    let toast = this.toastCtrl.create({
+      message: 'Alguien solicitó tu donacion',
+      showCloseButton: true,
+      closeButtonText: 'Ok',
+      position: 'top'
+    });
+    toast.present();
   }
 
    

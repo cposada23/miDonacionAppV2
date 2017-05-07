@@ -206,11 +206,14 @@ export class DonacionService {
       nombreBeneficiario: nombreUsuario,
       donacionKey: donacionKey,
       reversed: 0 - Date.now(),
+      donante: donanteKey,
       mensaje: mensaje
     }
-    console.log("contactoBiene", contactoBienes);
+    console.log("contacto bienes:" , contactoBienes);
+    //console.log("contactoBiene", contactoBienes);
+    const contactokey = this.sdkDb.child('contactoBienes').push().key;
     let dataToSave = {};
-    dataToSave[`contactoBienes/${donacionKey}`] = contactoBienes;
+    dataToSave[`contactoBienes/${contactokey}`] = contactoBienes;
     return this.firebaseUpdate(dataToSave);
   }
 

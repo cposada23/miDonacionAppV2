@@ -3,6 +3,8 @@ import { HomePage } from '../home/home';
 import { NotificacionesPage } from '../notificaciones/notificaciones';
 import { PerfilPage } from '../perfil/perfil';
 import { NavController, NavParams, App } from 'ionic-angular';
+import { Usuario } from '../../models/usuario';
+import { Auth } from '../../providers/auth';
 //import { PreguntaPage } from '../pregunta/pregunta';
 @Component({
   templateUrl: 'tabs.html'
@@ -15,9 +17,26 @@ export class TabsPage {
   tab3Root: any = PerfilPage;
   params:NavParams;
   //perfil: string;
-  constructor(private app:App, private navCtrl: NavController, private navParams: NavParams) {
+  usuario:Usuario;
+  keyUsuario: string;
+  numNotificaciones = 0;
+  constructor(private auth:Auth, private app:App, private navCtrl: NavController, private navParams: NavParams) {
     //this.perfil = this.navParams.get('perfil');
     this.params = this.navParams;
+    this.usuario = this.auth.getUsuario();
+    //
+    // if (this.auth){
+    //   console.log("hola")
+    // }else{console.log("no")}
+    // setInterval(()=>{
+    //   this.numNotificaciones ++;
+    // },1000);
     
   }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad RegistroPage');
+   // this.keyUsuario = this.auth.getUsuario().$key;
+  }
+
 }
