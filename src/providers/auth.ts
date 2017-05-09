@@ -97,8 +97,14 @@ export class Auth {
     return this.af.auth.createUser({email,password});
   }
 
+  getNotificaciones(usuarioKey:string) {
+    return this.db.list(`notificaciones/${usuarioKey}`);
+  }
+
+
   puedeContactarBienes(donacionKey:string, usuarioKey: string): Observable<any> {
-    return this.db.object(`misContactosPorDonaciones/${usuarioKey}/${donacionKey}`);
+    console.log("puede contactar : ", donacionKey, "  ", usuarioKey);
+    return this.db.object(`misContactosPorDonacionBienes/${usuarioKey}/${donacionKey}`);
   }
 
   notificar() {

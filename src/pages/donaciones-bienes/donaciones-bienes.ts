@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { DonacionService } from '../../providers/donacion-service';
 import { Observable } from 'rxjs/Rx';
 import { ContactoBienesPage } from '../contacto-bienes/contacto-bienes';
@@ -18,7 +18,7 @@ export class DonacionesBienesPage {
   donaciones$: Observable<any[]>;
   nombreSubcategoria: string;
   keyUsuario: string;
-  constructor(private auth:Auth, private donacionService: DonacionService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private alertCtrl: AlertController, private auth:Auth, private donacionService: DonacionService,public navCtrl: NavController, public navParams: NavParams) {
     this.keyUsuario = this.auth.getUsuario().$key;
 
   }
@@ -32,9 +32,29 @@ export class DonacionesBienesPage {
 
   irContacto(donacion){
     console.log("ir a contacto donacion: ", donacion);
-    this.navCtrl.push(ContactoBienesPage, {
-      donacion: donacion
+    let subs  = this.auth.puedeContactarBienes(donacion.$key, this.keyUsuario).subscribe(data => {
+      console.log("dataaaa", data);
+      console.log("data.value", data.$value)
+      console.log("data.exist", data.$exists());
+      if(!data.$exists()) {
+        this.navCtrl.push(ContactoBienesPage, {
+          donacion: donacion
+        });
+      }
+      else {
+        this.notificar();
+      }
+      subs.unsubscribe();
     });
+    
+  }
+
+  notificar() {
+    let alert = this.alertCtrl.create({
+      title: 'Ya hiciste contacto para esta publicacion, espera que te repondan',
+      buttons:['Ok']
+    });
+    alert.present();
   }
 
 }

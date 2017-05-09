@@ -10,5 +10,16 @@
 
 
 <ion-content padding>
-
+  <ion-card *ngFor="let notificacion of notificaciones">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="assets/img/defaultProfileMale.jpg" imageViewer>
+      </ion-avatar>
+      <h2>{{notificacion.nombreBeneficiario}}</h2>
+      <p>--Fecha--</p>
+    </ion-item>
+    <ion-card-content>
+      <p>{{notificacion.mensaje}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

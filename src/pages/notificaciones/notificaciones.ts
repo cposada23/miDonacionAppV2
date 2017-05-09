@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Auth } from '../../providers/auth';
 
 /*
   Generated class for the Notificaciones page.
@@ -12,8 +13,13 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'notificaciones.html'
 })
 export class NotificacionesPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  notificaciones:Array<any>;
+  constructor(private auth:Auth, public navCtrl: NavController, public navParams: NavParams) {
+    let key = this.auth.getUsuario().$key;
+    this.auth.getNotificaciones(key).subscribe(notificaciones => {
+      this.notificaciones = notificaciones;
+    });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificacionesPage');
