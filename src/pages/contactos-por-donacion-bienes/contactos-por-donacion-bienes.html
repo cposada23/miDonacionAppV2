@@ -1,0 +1,30 @@
+<!--
+  Generated template for the ContactosPorDonacionBienes page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>contactosPorDonacionBienes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card class ="notificacion" *ngFor="let contacto of contactos$ | async" (click)="irContacto(contacto)">
+    
+    <ion-item class="notificacion">
+      <ion-avatar item-left>
+        <img src="assets/img/defaultProfileMale.jpg" imageViewer>
+      </ion-avatar>
+      <h2>{{contacto.nombreBeneficiario}}</h2>
+      <p>--Fecha--</p>
+    </ion-item>
+    <ion-card-content>
+      <p>{{contacto.mensaje}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

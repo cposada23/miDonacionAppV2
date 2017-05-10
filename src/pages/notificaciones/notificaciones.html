@@ -10,8 +10,11 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let notificacion of notificaciones">
-    <ion-item>
+  <ion-card class ="notificacion" *ngFor="let notificacion of notificaciones$ | async" (click)="irContacto(notificacion)">
+    <ion-item class="notificacion">
+      <button ion-button item-right icon-only clear color="dark" (click)="eliminarNotificacion(notificacion)" > <ion-icon name="close-circle"></ion-icon></button>
+    </ion-item>
+    <ion-item class="notificacion">
       <ion-avatar item-left>
         <img src="assets/img/defaultProfileMale.jpg" imageViewer>
       </ion-avatar>

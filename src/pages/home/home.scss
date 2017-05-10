@@ -5,12 +5,12 @@ page-home {
     }
 
     .card-title {
-        position: absolute;
+        //position: absolute;
         top: 20%;
-        font-size: 1.5em;
+        font-size: 2em;
         width: 100%;
         font-weight: bold;
-        color: #fff;
+        color: #798478;
     }
 
     .card-subtitle {
@@ -20,9 +20,5 @@ page-home {
         width: 100%;
         color: #fff;
     }
-    .card-content {
-        position: absolute;
-        top: 35%;
-        width: 100%;
-    }
+    
 }

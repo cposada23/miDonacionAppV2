@@ -217,6 +217,18 @@ export class DonacionService {
     return this.firebaseUpdate(dataToSave);
   }
 
+  getDonacionBienesPorDonacionKey(donacionkey: string): Observable<any> {
+    return this.angularFireDatabase.object(`donacionesBienes/${donacionkey}`);
+  }
+
+  getContacto(contactokey: string): Observable<any> {
+    return this.angularFireDatabase.object(`contactoBienes/${contactokey}`);
+  }
+
+  getContactosPorDonacion(donacionKey: string): Observable<any> {
+    return this.angularFireDatabase.list(`contactoDonacionesBienes/${donacionKey}`);
+  }
+
   firebaseUpdate(dataToSave){
     const subject = new Subject();
     this.sdkDb.update(dataToSave).then(

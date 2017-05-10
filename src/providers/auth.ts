@@ -27,6 +27,7 @@ export class Auth {
             this.notificar();
             
           });
+          
           // setInterval(() => {
           //     this.notificar();
           // }, 10000);
@@ -101,10 +102,18 @@ export class Auth {
     return this.db.list(`notificaciones/${usuarioKey}`);
   }
 
+  eliminarNotificacion(usuarioKey:string, notificacionKey: string) {
+    return  this.db.object(`notificaciones/${usuarioKey}/${notificacionKey}`).$ref.remove();
+  }
+
 
   puedeContactarBienes(donacionKey:string, usuarioKey: string): Observable<any> {
     console.log("puede contactar : ", donacionKey, "  ", usuarioKey);
     return this.db.object(`misContactosPorDonacionBienes/${usuarioKey}/${donacionKey}`);
+  }
+
+  getMisContactos(usuarioKey: string): Observable<any[]> {
+    return this.db.list(`misContactosPorDonacionBienes/${usuarioKey}`);
   }
 
   notificar() {

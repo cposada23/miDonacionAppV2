@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Usuario } from '../../models/usuario';
 import { MisDonacionesPage } from '../mis-donaciones/mis-donaciones';
 import { Auth } from '../../providers/auth';
+import { ContactosHechosPage } from '../contactos-hechos/contactos-hechos';
 /*
   Generated class for the Perfil page.
 
@@ -27,6 +28,12 @@ export class PerfilPage {
   irMisDonaciones(){  
     this.navCtrl.push(MisDonacionesPage, {
       key:this.usuario.$key
+    });
+  }
+
+  irMisContactos() {
+    this.navCtrl.push(ContactosHechosPage, {
+      key: this.usuario.$key
     });
   }
 

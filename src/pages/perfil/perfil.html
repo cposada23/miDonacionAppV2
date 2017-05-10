@@ -51,13 +51,21 @@
 
   <ion-card (click)="irMisDonaciones()">
     <img src="assets/img/donacion.jpg"/>
-    <div class="card-title"><ion-badge color="dark"><font size="4">Mis Donaciones</font></ion-badge> </div>
+    <div class="card-title"><ion-badge color="dark"><font size="4">Donaciones Hechas</font></ion-badge> </div>
     <div class="card-subtitle"><ion-badge color="light" >{{usuario.donacionesHechas || 0}}</ion-badge> </div>
   </ion-card>
 
   <ion-card >
-    <img src="assets/img/deg1.png"/>
-    <div class="card-title"><ion-badge color="dark"><font size="4">Notificaciones</font></ion-badge> </div>
+    <img src="assets/img/donacion.jpg"/>
+    <div class="card-title"><ion-badge color="dark"><font size="4">Donaciones Recibidas</font></ion-badge> </div>
+    <div class="card-subtitle"><ion-badge color="light" >{{usuario.notificaciones}}</ion-badge> </div>
+
+  </ion-card>
+
+
+  <ion-card >
+    <img src="assets/img/donacion.jpg" (click)="irMisContactos()" />
+    <div class="card-title"><ion-badge color="dark"><font size="4">Peticiones de donacion</font></ion-badge> </div>
     <div class="card-subtitle"><ion-badge color="light" >{{usuario.notificaciones}}</ion-badge> </div>
 
   </ion-card>

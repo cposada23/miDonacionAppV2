@@ -43,8 +43,10 @@ export class DonacionesBienesPage {
       }
       else {
         this.notificar();
+      }if( subs ){
+        subs.unsubscribe();
       }
-      subs.unsubscribe();
+      
     });
     
   }

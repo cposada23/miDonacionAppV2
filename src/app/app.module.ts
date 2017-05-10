@@ -35,7 +35,9 @@ import { DonacionesServiciosPage } from '../pages/donaciones-servicios/donacione
 
 /** Contacto */
 import { ContactoBienesPage } from '../pages/contacto-bienes/contacto-bienes';
-
+import { ContactosPorDonacionBienesPage } from '../pages/contactos-por-donacion-bienes/contactos-por-donacion-bienes';
+import { DetalleContactoBienesPage } from '../pages/detalle-contacto-bienes/detalle-contacto-bienes';
+import { ContactosHechosPage } from '../pages/contactos-hechos/contactos-hechos'; 
 
 import { MisDonacionesServiciosPage } from '../pages/mis-donaciones-servicios/mis-donaciones-servicios'; 
 import { PreguntaPage }  from '../pages/pregunta/pregunta';
@@ -84,7 +86,10 @@ import { RegistroPage } from '../pages/registro/registro';
     CategoriasServiciosPage,
     DonacionesServiciosPage,
     NuevaDonacionServicioPage,
-    ContactoBienesPage
+    ContactoBienesPage,
+    ContactosPorDonacionBienesPage,
+    DetalleContactoBienesPage,
+    ContactosHechosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -114,7 +119,10 @@ import { RegistroPage } from '../pages/registro/registro';
     CategoriasServiciosPage,
     DonacionesServiciosPage,
     NuevaDonacionServicioPage,
-    ContactoBienesPage
+    ContactoBienesPage,
+    ContactosPorDonacionBienesPage,
+    DetalleContactoBienesPage,
+    ContactosHechosPage
   ],
   providers: [
     StatusBar,

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DonacionService } from '../../providers/donacion-service';
 import { Observable } from 'rxjs/Rx';
+import { ContactosPorDonacionBienesPage } from '../contactos-por-donacion-bienes/contactos-por-donacion-bienes';
 /*
   Generated class for the MisDonacionesBienes page.
 
@@ -20,6 +21,13 @@ export class MisDonacionesBienesPage {
   ionViewDidLoad() {
     const key = this.navParams.get('key');
     this.misDonaciones$ = this.donacionService.misDonacionesBienes(key);
+  }
+  irContactosDonacion(donacion) {
+    console.log("ir a contactos de esta donacion ", donacion);
+
+    this.navCtrl.push(ContactosPorDonacionBienesPage, {
+      donacion: donacion.$key
+    });
   }
 
 }

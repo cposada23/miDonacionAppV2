@@ -2,23 +2,23 @@
   
 </ion-header>
 
-<ion-content padding style="background-image: url(assets/img/deg3.png); background-repeat: no-repeat;background-size:cover;">
-  <ion-card>
+<ion-content padding class = "principal">
+  <ion-card class = "cardPrincipal">
    
-    <img src="assets/img/fondoNegro.jpg"/>
+    <!--<img src="assets/img/fondoNegro.jpg"/>-->
     <div class="card-title">¿Qué eres?</div>
     <div class="card-content">
       <ion-grid>
         <ion-row>
           <ion-col col-6 >
-            <ion-card (click)="irDonar()">
-              <img src="assets/img/fondo.jpg" />
+            <ion-card (click)="irDonar()" class="cardSecundaria">
+              <img src="assets/img/fondoNegro.jpg" />
               <div class="card-subtitle">Donador</div>
             </ion-card>
           </ion-col> 
           <ion-col col-6 >
-            <ion-card (click)="irBeneficio()">
-              <img src="assets/img/fondo.jpg"/>
+            <ion-card (click)="irBeneficio()" class="cardSecundaria">
+              <img src="assets/img/fondoNegro.jpg"/>
               <div class="card-subtitle">Beneficiario</div>
             </ion-card>
           </ion-col> 
