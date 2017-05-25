@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding style="background-image: url(assets/img/deg3.png); background-repeat: no-repeat;background-size:cover;">
+<ion-content padding class="fondoBlanco"  style="background-image: url(assets/img/degblanco.png); ">
   
   <ion-grid>
     <ion-row>
@@ -28,7 +28,7 @@
     <ion-row>
       <ion-col col-6 *ngFor="let categoria of categoriasBienesFiltro" (click)="irSubCategorias(categoria)">
         <ion-card>
-          <img src="assets/img/fondo.jpg"/>
+          <img src="assets/img/azul3.png" />
           <div class="card-title">{{categoria?.nombre}}</div>
         </ion-card>
       </ion-col> 

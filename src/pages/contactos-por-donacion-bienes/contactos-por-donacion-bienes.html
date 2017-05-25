@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="fondoBlanco"  style="background-image: url(assets/img/degblanco.png); ">
   <ion-card class ="notificacion" *ngFor="let contacto of contactos$ | async" (click)="irContacto(contacto)">
     
     <ion-item class="notificacion">

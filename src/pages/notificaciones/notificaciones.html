@@ -9,7 +9,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="fondoBlanco"  style="background-image: url(assets/img/degblanco.png); ">
   <ion-card class ="notificacion" *ngFor="let notificacion of notificaciones$ | async" (click)="irContacto(notificacion)">
     <ion-item class="notificacion">
       <button ion-button item-right icon-only clear color="dark" (click)="eliminarNotificacion(notificacion)" > <ion-icon name="close-circle"></ion-icon></button>
